@@ -1,0 +1,14 @@
+button {
+    background: #fff;
+    border: 1px solid #999;
+    float: left;
+    font-size: calc(10px + 2vmin);
+    font-weight: bold;
+    line-height: 8vh;
+    height: 8vh;
+    margin-right: -1px;
+    margin-top: -1px;
+    padding: 0;
+    text-align: center;
+    width: 8vh;
+}
