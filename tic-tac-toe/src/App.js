@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Square from './components/square';
 import './App.css';
 
+//Main App component for the tic-tac-toe game
 function App() {
   let [value, setValue] = useState('X');
   let [statValue, setStatValue] = useState('X');
@@ -11,6 +12,7 @@ function App() {
   let [statText, setStatText] = useState('Next player: ');
   let status = statText + statValue;
 
+  //Handle click event for the tic-tac-toe board
   function handleClick(e) {
     setValue(value === 'X' ? 'O' : 'X');
 
@@ -26,7 +28,7 @@ function App() {
     
     setSquares([...squares, {id: squareId, value: value}]);  
 
-    let winner = checkWinner(status);
+    let winner = checkWinner();
     if (winner !== null) {
       setStatText('Winner: ');
       setStatValue(winner);
@@ -36,6 +38,7 @@ function App() {
   }  
 
   return (
+    //JSX for the tic-tac-toe game
     <div className="App">
       <header className="App-header">
         Tic Tac Toe
@@ -89,7 +92,8 @@ function App() {
   );
 }
 
-function checkWinner(status){
+//Check for a winner after each move
+function checkWinner(){
   let winner = null;
 
   let a1 = document.getElementById('1').innerHTML;
@@ -105,111 +109,66 @@ function checkWinner(status){
   if (a1 === a2 && a2 === a3 && a1 !== '') {
     winner = a1;
 
-    let buttons = document.getElementsByClassName('square');
-    for (let i = 0; i < buttons.length; i++) {
-      buttons[i].disabled = true;
-    }
-
-    buttons[0].style.color = 'green';
-    buttons[1].style.color = 'green';
-    buttons[2].style.color = 'green';
+    getSquares(0,1,2);
   }
 
   if (b1 === b2 && b2 === b3 && b1 !== '') {
     winner = b1;
 
-    let buttons = document.getElementsByClassName('square');
-    for (let i = 0; i < buttons.length; i++) {
-      buttons[i].disabled = true;
-    }
-
-    buttons[3].style.color = 'green';
-    buttons[4].style.color = 'green';
-    buttons[5].style.color = 'green';
+    getSquares(3,4,5);
   }
 
   if (c1 === c2 && c2 === c3 && c1 !== '') {
     winner = c1;
 
-    let buttons = document.getElementsByClassName('square');
-    for (let i = 0; i < buttons.length; i++) {
-      buttons[i].disabled = true;
-    }
-
-    buttons[6].style.color = 'green';
-    buttons[7].style.color = 'green';
-    buttons[8].style.color = 'green';
+    getSquares(6,7,8);
   }
 
   if (a1 === b1 && b1 === c1 && a1 !== '') {
     winner = a1;
 
-    let buttons = document.getElementsByClassName('square');
-    for (let i = 0; i < buttons.length; i++) {
-      buttons[i].disabled = true;
-    }
-
-    buttons[0].style.color = 'green';
-    buttons[3].style.color = 'green';
-    buttons[6].style.color = 'green';
+    getSquares(0,3,6);
   }
 
   if (a2 === b2 && b2 === c2 && a2 !== '') {
     winner = a2;
 
-    let buttons = document.getElementsByClassName('square');
-    for (let i = 0; i < buttons.length; i++) {
-      buttons[i].disabled = true;
-    }
-
-    buttons[1].style.color = 'green';
-    buttons[4].style.color = 'green';
-    buttons[7].style.color = 'green';
+    getSquares(1,4,7);
   }
 
   if (a3 === b3 && b3 === c3 && a3 !== '') {
     winner = a3;
 
-    let buttons = document.getElementsByClassName('square');
-    for (let i = 0; i < buttons.length; i++) {
-      buttons[i].disabled = true;
-    }
-
-    buttons[2].style.color = 'green';
-    buttons[5].style.color = 'green';
-    buttons[8].style.color = 'green';
+    getSquares(2,5,8);
   }
 
   if (a1 === b2 && b2 === c3 && a1 !== '') {
     winner = a1;
 
-    let buttons = document.getElementsByClassName('square');
-    for (let i = 0; i < buttons.length; i++) {
-      buttons[i].disabled = true;
-    }
-
-    buttons[0].style.color = 'green';
-    buttons[4].style.color = 'green';
-    buttons[8].style.color = 'green';
+    getSquares(0,4,8);
   }
 
   if (a3 === b2 && b2 === c1 && a3 !== '') {
     winner = a3;
 
-    let buttons = document.getElementsByClassName('square');
-    for (let i = 0; i < buttons.length; i++) {
-      buttons[i].disabled = true;
-    }
-
-    buttons[2].style.color = 'green';
-    buttons[4].style.color = 'green';
-    buttons[6].style.color = 'green';
+    getSquares(2,4,6);
   }  
-
   
   return winner;
 }
 
+function getSquares(x,y,z){
+  let buttons = document.getElementsByClassName('square');
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].disabled = true;
+    }
+
+    buttons[x].style.color = 'green';
+    buttons[y].style.color = 'green';
+    buttons[z].style.color = 'green';
+  }
+
+//Reset the game board
 function reset(){
   let squares = document.getElementsByClassName('square');
   for (let i = 0; i < squares.length; i++) {
