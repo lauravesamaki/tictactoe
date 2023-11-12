@@ -12,3 +12,8 @@ button {
     text-align: center;
     width: 8vh;
 }
+
+button:disabled {
+    background: #fff;
+    color: black;
+}
